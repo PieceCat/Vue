@@ -17,6 +17,7 @@ import sharedetail from '../components/Home/Share/shareInfo.vue'
 import buy from '../components/Home/Buy/buy.vue'
 import goodsdetail from '../components/Home/Buy/buyInfo.vue'
 import buycomment from '../components/Home/Buy/buyComments.vue'
+import buydesc from '../components/Home/Buy/buyDesc.vue'
 
 
 let router = new VueRouter({
@@ -36,7 +37,8 @@ let router = new VueRouter({
         { name: 'newsDetail', path: '/detail/:id', component: newsdetail, props: true },
         { name: 'shareDetail', path: '/shareInfo/:id', component: sharedetail, props: true },
         { name: 'goodsDetail', path: '/buy/:id', component: goodsdetail, props: true },
-        { name: 'goodsComment', path: '/buy/comment/:id', component: buycomment, props: true }
+        { name: 'goodsComment', path: '/buy/comment/:id', component: buycomment, props: true },
+        { name: 'goodsDesc', path: '/buy/desc/:id', component: buydesc, props: true }
     ]
 })
 

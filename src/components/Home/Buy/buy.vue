@@ -40,7 +40,6 @@ export default {
           .then((response)=>{
             if(response.status===200&&response.data.status===0){
               this.goods = response.data.message
-              console.log(this.goods);
             }
           })
       }
