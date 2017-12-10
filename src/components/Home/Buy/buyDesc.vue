@@ -1,7 +1,7 @@
 <template>
   <div class="mui-content">
     <h3>{{ goodsDesc.title }}</h3>
-    <div class="content" v-html="goodsDesc.content"></div>
+    <div class="details" v-html="goodsDesc.content"></div>
   </div>
 </template>
 <script>

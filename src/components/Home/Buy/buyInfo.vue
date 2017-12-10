@@ -130,5 +130,9 @@
   .mint-button--primary.is-plain{
     margin-bottom: 10px;
   }
+  .mint-button{
+    font-size: 14px;
+    height: 35px;
+  }
 </style>
 

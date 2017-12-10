@@ -21,3 +21,5 @@ Vue.use(Mint);
 import 'mint-ui/lib/style.css';
 // 引用mui的css
 import '../../statics/css/mui.css'
+// 引用设置的样式
+import '../../statics/css/style.css'
