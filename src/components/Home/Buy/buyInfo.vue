@@ -27,7 +27,7 @@
         </div>
         <div class="button">
           <mt-button type="primary" size="large" plain>图文介绍</mt-button>
-          <mt-button type="danger" size="large" plain>商品评论</mt-button>
+          <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}"><mt-button type="danger" size="large" plain>商品评论</mt-button></router-link>
         </div>  
     </div>
   </div>
