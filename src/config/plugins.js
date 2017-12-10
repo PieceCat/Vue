@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 //引用axios
 import axios from 'axios'
-axios.defaults.baseURL = 'http://vue.studyit.io/api/'
+axios.defaults.baseURL = 'http://127.0.0.1:8899/api/'
 
 
 Vue.prototype.$http = axios

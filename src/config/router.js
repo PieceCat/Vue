@@ -15,6 +15,7 @@ import video from '../components/Home/Video/video.vue'
 import newsdetail from '../components/Home/News/detail.vue'
 import sharedetail from '../components/Home/Share/shareInfo.vue'
 import buy from '../components/Home/Buy/buy.vue'
+import goodsdetail from '../components/Home/Buy/buyInfo.vue'
 
 
 let router = new VueRouter({
@@ -33,7 +34,7 @@ let router = new VueRouter({
         { path: '/video', component: video },
         { name: 'newsDetail', path: '/detail/:id', component: newsdetail, props: true },
         { name: 'shareDetail', path: '/shareInfo/:id', component: sharedetail, props: true },
-        { path: '/buy', component: buy }
+        { name: 'goodsDetail', path: '/buy/:id', component: goodsdetail, props: true }
     ]
 })
 

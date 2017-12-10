@@ -3,13 +3,13 @@
       <div class="buy">
         <ul class="mui-table-view mui-grid-view">
           <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goods" :key="item.id">
-            <a href="#">
+            <router-link :to="{name:'goodsDetail',params:{id:item.id}}">
               <img class="mui-media-object" :src="item.img_url">
-            </a>    
+            </router-link>    
             <div class="box">
               <h5>{{ item.title }}</h5>
               <div class="price">
-                <h6><span>￥{{ item.sell_price }}</span>￥{{ item.market_price}}</h6>
+                <h6><span>￥{{ item.sell_price }}</span><s>￥{{ item.market_price}}</s></h6>
                 <div class="sell">
                   <span class="count">剩{{ item.stock_quantity}}件</span>
                   <span class="topsell">热卖中</span>
@@ -25,7 +25,8 @@
 export default {
     data(){
       return{
-        goods:[]
+        goods:[],
+        pageindex:1
       }
     },
     created(){
@@ -33,7 +34,7 @@ export default {
     },
     methods:{
       getgoodslist(){
-        let url = 'getgoods?pageindex=1'
+        let url = 'getgoods?pageindex='+this.pageindex
         this.axios
           .get(url)
           .then((response)=>{
@@ -86,6 +87,7 @@ export default {
     .box .price h6{
         text-align: left;
     }
+
     .box .price h6 span{
         color:red;
         font-size: 14px;
