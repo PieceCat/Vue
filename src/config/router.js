@@ -14,6 +14,8 @@ import feedback from '../components/Home/Feedback/feedback.vue'
 import video from '../components/Home/Video/video.vue'
 import newsdetail from '../components/Home/News/detail.vue'
 import sharedetail from '../components/Home/Share/shareInfo.vue'
+import buy from '../components/Home/Buy/buy.vue'
+
 
 let router = new VueRouter({
     linkActiveClass: 'mui-active',
@@ -30,7 +32,8 @@ let router = new VueRouter({
         { path: '/buy', component: buy },
         { path: '/video', component: video },
         { name: 'newsDetail', path: '/detail/:id', component: newsdetail, props: true },
-        { name: 'shareDetail', path: '/shareInfo/:id', component: sharedetail, props: true }
+        { name: 'shareDetail', path: '/shareInfo/:id', component: sharedetail, props: true },
+        { path: '/buy', component: buy }
     ]
 })
 

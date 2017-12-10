@@ -2,35 +2,21 @@
   <div class="mui-content">
       <div class="buy">
         <ul class="mui-table-view mui-grid-view">
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#">
-		                <img class="mui-media-object" src="../../../../statics/images/cbd.jpg">
-		                <div class="mui-media-body">幸福就是可以一起睡觉</div>
-                </a>
-            </li>
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#">
-		                <img class="mui-media-object" src="../../../../statics/images/cbd.jpg">
-		                <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
-                </a>
-            </li>
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#"><img class="mui-media-object" src="../../../../statics/images/cbd.jpg">
-		                <div class="mui-media-body">Color of SIP CBD</div>
-                </a>
-            </li>
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#">
-		                <img class="mui-media-object" src="../../../../statics/images/cbd.jpg">
-		                <div class="mui-media-body">
-                      <h5>静静看这世界</h5>
-                      <div class="price">
-                        <h6>￥2195<span>￥2195</span></h6>
-                        <span>热卖总</span><span>剩70件</span>
-                      </div>
-                    </div>
-                </a>
-            </li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goods" :key="item.id">
+            <a href="#">
+              <img class="mui-media-object" :src="item.img_url">
+            </a>    
+            <div class="box">
+              <h5>{{ item.title }}</h5>
+              <div class="price">
+                <h6><span>￥{{ item.sell_price }}</span>￥{{ item.market_price}}</h6>
+                <div class="sell">
+                  <span class="count">剩{{ item.stock_quantity}}件</span>
+                  <span class="topsell">热卖中</span>
+                </div>
+              </div>
+            </div>
+          </li>
 		    </ul>    
       </div>
   </div>
@@ -39,36 +25,87 @@
 export default {
     data(){
       return{
-
+        goods:[]
+      }
+    },
+    created(){
+      this.getgoodslist()
+    },
+    methods:{
+      getgoodslist(){
+        let url = 'getgoods?pageindex=1'
+        this.axios
+          .get(url)
+          .then((response)=>{
+            if(response.status===200&&response.data.status===0){
+              this.goods = response.data.message
+              console.log(this.goods);
+            }
+          })
       }
     }
 }
 </script>
 <style scoped>
-  /* .mui-table-view.mui-grid-view .mui-table-view-cell{
-    padding: 5px;
-    margin: 4px;
-    margin-right: -4px;
-  }
-  .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-object{
-    width: 100%
-  } */
-  .mui-plus.mui-android header.mui-bar{
-    display: none;
-  }
-  .mui-plus.mui-android .mui-bar-nav~.mui-content{
-    padding: 0;
-  }
-  .mui-media-body{
-    height: auto;
-  }
-  .mui-media-body h5{
-    font-size: 12px;
-    margin: 5px 0;
-  }
-  .price{
-    background-color: rgba(92,92,92,0.1);
-    padding: 5px;
-  }
+    .mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn){
+      margin: -7px;
+    }
+    .buy {
+      margin-bottom: 50px;
+    }
+    .mui-table-view.mui-grid-view .mui-table-view-cell{
+          padding: 5px;
+      }
+    .mui-grid-view li{
+        border: 1px solid rgba(92,92,92,0.4);
+        margin: 4px 2px 4px 4px;
+        box-shadow:0 0 4px #666;
+        height: 300px;
+        position: relative;
+    }
+
+    .box {
+    	position: absolute;
+        left: 0px;
+        bottom: 0px;
+        width: 100%;
+    }
+    .box h5{
+        color:#000;
+        text-align: left;
+        font-size:12px;
+        font-family: '微软雅黑';
+        padding: 0 2px;
+    }
+    .box .price{
+        height: 60px;
+        background-color: rgba(92,92,92,0.1);
+        margin: 0;
+        padding: 5px;
+    }
+    .box .price h6{
+        text-align: left;
+    }
+    .box .price h6 span{
+        color:red;
+        font-size: 14px;
+        margin-right: 15px;
+    }
+    .sell{
+        margin-top: 15px;
+        font-size: 12px;
+    }
+    .sell .topsell{
+        float: left;
+        width: 40%;
+        text-align: left;
+        color:rgba(92,92,92,0.8);
+    }
+    .sell .count{
+        float: right;
+        width: 55%;
+        text-align: right;
+        color:rgba(92,92,92,0.8);
+    }
 </style>
 
