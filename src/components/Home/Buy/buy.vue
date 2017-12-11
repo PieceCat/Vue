@@ -5,9 +5,9 @@
           <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goods" :key="item.id">
             <router-link :to="{name:'goodsDetail',params:{id:item.id}}">
               <img class="mui-media-object" :src="item.img_url">
+              <h5>{{ item.title }}</h5>
             </router-link>    
             <div class="box">
-              <h5>{{ item.title }}</h5>
               <div class="price">
                 <h6><span>￥{{ item.sell_price }}</span><s>￥{{ item.market_price}}</s></h6>
                 <div class="sell">
@@ -47,35 +47,62 @@ export default {
 }
 </script>
 <style scoped>
-    .mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn){
-      margin: -7px;
+    .mui-table-view:before {
+        display: none;
     }
-    .buy {
-      margin-bottom: 50px;
+    
+    .mui-table-view:after {
+        display: none;
     }
-    .mui-table-view.mui-grid-view .mui-table-view-cell{
-          padding: 5px;
-      }
-    .mui-grid-view li{
-        border: 1px solid rgba(92,92,92,0.4);
-        margin: 4px 2px 4px 4px;
-        box-shadow:0 0 4px #666;
-        height: 300px;
-        position: relative;
+    
+    .mui-content>.mui-table-view:first-child {
+        margin-top: 0px;
     }
-
-    .box {
-    	position: absolute;
-        left: 0px;
-        bottom: 0px;
+    
+    .mui-table-view.mui-grid-view .mui-table-view-cell {
+        margin-right: 0px;
+        padding: 0px;
+    }
+    
+    .mui-table-view.mui-grid-view {
+        padding: 5px;
+    }
+    
+    .mui-table-view-cell {
+        border: 1px solid rgba(92, 92, 92, 0.5);
+        box-shadow: 0 0 4px #666;
+        padding: 4px;
+        margin-top: 5px;
+        margin-left: 5px;
+        width: 48%;
+    }
+    
+    .mui-table-view-cell img {
         width: 100%;
     }
-    .box h5{
+    
+    .mui-table-view-cell:after {
+        display: none;
+    }
+    
+    .mui-table-view-cell>a {
+        margin: 0;
+    }
+    
+    .mui-table-view.mui-grid-view .mui-table-view-cell>a:not(.mui-btn) {
+        margin: 0;
+        margin-bottom: 5px;
+        text-align: left;
+        color: #000;
+        /* white-space: normal; */
+    }
+    h5{
         color:#000;
         text-align: left;
         font-size:12px;
         font-family: '微软雅黑';
         padding: 0 2px;
+        display: block;
     }
     .box .price{
         height: 60px;
