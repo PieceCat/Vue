@@ -14,7 +14,7 @@
           </div>
           <div class="button">
             <div class="mui-btn mui-btn-primary">立即购买</div>
-            <button type="button" class="mui-btn mui-btn-danger">加入购物车</button>
+            <button @click="addshopcar" class="mui-btn mui-btn-danger">加入购物车</button>
           </div>
         </div>
         <div class="info">
@@ -68,6 +68,9 @@
           .catch((err)=>{
             console.error(err);
           })
+      },
+      addshopcar(){
+        
       }
     }
   }

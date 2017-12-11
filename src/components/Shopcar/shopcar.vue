@@ -6,7 +6,7 @@
                   <mt-switch v-model="value"></mt-switch>
               </div>
               <div class="center">
-                  <img src="item.thumb_path" alt="">
+                  <img :src="item.thumb_path" alt="">
               </div>
               <div class="right">
                 <h4>{{ item.title }}</h4>
@@ -36,7 +36,7 @@
         },
         methods:{
              getShopcarList(){
-                let url = 'goods/getshopcarlist/'+this.id
+                let url = 'goods/getshopcarlist/87'
                 this.axios
                     .get(url)
                     .then((response)=>{
