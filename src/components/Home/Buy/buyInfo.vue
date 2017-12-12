@@ -26,8 +26,10 @@
           </div>
         </div>
         <div class="button">
-          <router-link :to="{name:'goodsDesc',params:{id:goodsInfo.id}}"><mt-button type="primary" size="large" plain>图文介绍</mt-button></router-link>
-          <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}"><mt-button type="danger" size="large" plain>商品评论</mt-button></router-link>
+          <!-- <router-link :to="{name:'goodsDesc',params:{id:goodsInfo.id}}"><mt-button type="primary" size="large" plain>图文介绍</mt-button></router-link> -->
+          <a @click="push" class="mui-btn mui-btn-primary mui-btn-outlined">图文介绍</a>
+          <!-- <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}"><mt-button type="danger" size="large" plain>商品评论</mt-button></router-link> -->
+          <a @click="pushone" class="mui-btn mui-btn-danger mui-btn-outlined">商品评论</a>
         </div>  
     </div>
   </div>
@@ -68,6 +70,12 @@
           .catch((err)=>{
             console.error(err);
           })
+      },
+      push(){
+        this.$router.push({name:'goodsDesc',params:{id:this.id}})
+      },
+      pushone(){
+        this.$router.push({name:'goodsComment',params:{id:this.id}})
       },
       addshopcar(){
         
@@ -136,6 +144,12 @@
   .mint-button{
     font-size: 14px;
     height: 35px;
+  }
+  .button a{
+    width: 100%;
+  }
+  .button a:first-child{
+    margin-bottom: 10px;
   }
 </style>
 

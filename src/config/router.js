@@ -23,11 +23,11 @@ import buydesc from '../components/Home/Buy/buyDesc.vue'
 let router = new VueRouter({
     linkActiveClass: 'mui-active',
     routes: [
-        { path: '/', redirect: '/home' },
-        { path: '/home', component: home },
-        { path: '/member', component: member },
-        { path: '/search', component: search },
-        { path: '/shopcar', component: shopcar },
+        { path: '/', meta: { title: '首页' }, redirect: '/home' },
+        { path: '/home', meta: { title: '首页' }, component: home },
+        { path: '/member', meta: { title: '会员' }, component: member },
+        { path: '/search', meta: { title: '搜索' }, component: search },
+        { path: '/shopcar', meta: { title: '购物车' }, component: shopcar },
         { path: '/news', component: news },
         { path: '/share', component: share },
         { path: '/contact', component: contact },
@@ -41,5 +41,13 @@ let router = new VueRouter({
         { name: 'goodsDesc', path: '/buy/desc/:id', component: buydesc, props: true }
     ]
 })
+router.afterEach((to, from) => {
+    if (to.meta.title) {
+        document.title = to.meta.title
+    } else {
+        document.title = '默认值'
+    }
+})
+
 
 export default router

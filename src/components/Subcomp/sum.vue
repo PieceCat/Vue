@@ -17,24 +17,19 @@
     props:['storageNum'],
     methods:{
       plus(){
-        if(this.number < this.storageNum){
-         
-          this.number ++
-        }else{
-          this.$toast('请输入正确的数量')
-          this.number=1
+        if(this.number >= this.storageNum){
+          return
         }
+        this.number++
       },
       minus(){
-        if(this.number > 1){
-          this.number--
+        if(this.number === 1){
+          return
         }
-        this.$toast('请输入正确的数量')
-        this.number=1
+        this.number--;
       },
       inpNum(){
         if(this.number > this.storageNum || this.number < 1){
-          this.$toast('请输入正确的数量')
           this.number = 1
         }
       }
@@ -45,6 +40,7 @@
   .mui-numbox{
     height: 25px;
     line-height: 25px;
+    display: inline-block;
   }
 </style>
 
