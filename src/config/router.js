@@ -23,6 +23,7 @@ import buydesc from '../components/Home/Buy/buyDesc.vue'
 let router = new VueRouter({
     linkActiveClass: 'mui-active',
     routes: [
+<<<<<<< HEAD
         { path: '/', redirect: '/home' },
         { path: '/home', meta: { title: '首页' }, component: home },
         { path: '/member', meta: { title: '会员中心' }, component: member },
@@ -34,6 +35,19 @@ let router = new VueRouter({
         { path: '/feedback', meta: { title: '反馈' }, component: feedback },
         { path: '/buy', meta: { title: '购买' }, component: buy },
         { path: '/video', meta: { title: '视频' }, component: video },
+=======
+        { path: '/', meta: { title: '首页' }, redirect: '/home' },
+        { path: '/home', meta: { title: '首页' }, component: home },
+        { path: '/member', meta: { title: '会员' }, component: member },
+        { path: '/search', meta: { title: '搜索' }, component: search },
+        { path: '/shopcar', meta: { title: '购物车' }, component: shopcar },
+        { path: '/news', component: news },
+        { path: '/share', component: share },
+        { path: '/contact', component: contact },
+        { path: '/feedback', component: feedback },
+        { path: '/buy', component: buy },
+        { path: '/video', component: video },
+>>>>>>> dev
         { name: 'newsDetail', path: '/detail/:id', component: newsdetail, props: true },
         { name: 'shareDetail', path: '/shareInfo/:id', component: sharedetail, props: true },
         { name: 'goodsDetail', path: '/buy/:id', component: goodsdetail, props: true },
@@ -41,6 +55,14 @@ let router = new VueRouter({
         { name: 'goodsDesc', path: '/buy/desc/:id', component: buydesc, props: true }
     ]
 })
+router.afterEach((to, from) => {
+    if (to.meta.title) {
+        document.title = to.meta.title
+    } else {
+        document.title = '默认值'
+    }
+})
+
 
 //路由跳转之后执行
 router.afterEach((to, from) => {

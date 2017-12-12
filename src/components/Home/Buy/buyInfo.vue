@@ -26,10 +26,17 @@
           </div>
         </div>
         <div class="button">
+<<<<<<< HEAD
           <!-- <router-link :to="{name:'goodsDesc',params:{id:goodsInfo.id}}" class="mui-btn mui-btn-primary mui-btn-outlined">图文介绍</router-link> -->
           <a @click="push" class="mui-btn mui-btn-primary mui-btn-outlined">图文介绍</a>
           <a @click="pushone" class="mui-btn mui-btn-primary mui-btn-outlined">商品评论</a>
           <!-- <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}" class="mui-btn mui-btn-primary mui-btn-outlined">商品评论</router-link> -->
+=======
+          <!-- <router-link :to="{name:'goodsDesc',params:{id:goodsInfo.id}}"><mt-button type="primary" size="large" plain>图文介绍</mt-button></router-link> -->
+          <a @click="push" class="mui-btn mui-btn-primary mui-btn-outlined">图文介绍</a>
+          <!-- <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}"><mt-button type="danger" size="large" plain>商品评论</mt-button></router-link> -->
+          <a @click="pushone" class="mui-btn mui-btn-danger mui-btn-outlined">商品评论</a>
+>>>>>>> dev
         </div>  
     </div>
   </div>
@@ -79,9 +86,12 @@
       pushone(){
         this.$router.push({name:'goodsComment',params:{id:this.id}})
       },
+<<<<<<< HEAD
       numberchanged(count){
         this.count = count
       },
+=======
+>>>>>>> dev
       addshopcar(){
         vueObj.$emit('updateBadge',this.count)
       }
@@ -150,6 +160,12 @@
   .mint-button{
     font-size: 14px;
     height: 35px;
+  }
+  .button a{
+    width: 100%;
+  }
+  .button a:first-child{
+    margin-bottom: 10px;
   }
 </style>
 
