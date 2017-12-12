@@ -9,7 +9,7 @@
           <div class="box">
             <h5>{{ item.title }}</h5>
             <div class="price">
-              <h6><span>￥{{ item.sell_price }}</span><s>￥{{ item.market_price}}</s></h6>
+              <h6><span>￥{{ item.sell_price }}</span><s>￥{{ item.market_price }}</s></h6>
               <div class="sell">
                 <span class="count">剩{{ item.stock_quantity}}件</span>
                 <span class="topsell">热卖中</span>
