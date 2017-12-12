@@ -10,7 +10,7 @@
           </div>
           <div class="num">
             购买数量：
-            <sum :storageNum="goodsInfo.stock_quantity"></sum>
+            <sum :storageNum="goodsInfo.stock_quantity" @numberchange="numberchanged"></sum>
           </div>
           <div class="button">
             <div class="mui-btn mui-btn-primary">立即购买</div>
@@ -22,12 +22,14 @@
           <div class="params">
             <p>商品编号：{{ goodsInfo.goods_no }}</p>
             <p>库存情况：{{ goodsInfo.stock_quantity }}</p>
-            <p>上架时间：{{ goodsInfo.add_time}}</p>
+            <p>上架时间：{{ goodsInfo.add_time | fmtdate('YYYY-MM-DD HH:mm:ss') }}</p>
           </div>
         </div>
         <div class="button">
-          <router-link :to="{name:'goodsDesc',params:{id:goodsInfo.id}}"><mt-button type="primary" size="large" plain>图文介绍</mt-button></router-link>
-          <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}"><mt-button type="danger" size="large" plain>商品评论</mt-button></router-link>
+          <!-- <router-link :to="{name:'goodsDesc',params:{id:goodsInfo.id}}" class="mui-btn mui-btn-primary mui-btn-outlined">图文介绍</router-link> -->
+          <a @click="push" class="mui-btn mui-btn-primary mui-btn-outlined">图文介绍</a>
+          <a @click="pushone" class="mui-btn mui-btn-primary mui-btn-outlined">商品评论</a>
+          <!-- <router-link :to="{name:'goodsComment',params:{id:goodsInfo.id}}" class="mui-btn mui-btn-primary mui-btn-outlined">商品评论</router-link> -->
         </div>  
     </div>
   </div>
@@ -35,11 +37,13 @@
 <script>
   import slider from '../../Subcomp/slide.vue'
   import sum from '../../Subcomp/sum.vue'
+  import vueObj from '../../../config/communication'
   export default{
     data(){
       return{
         goodsInfo:{},
-        imgurl:''
+        imgurl:'',
+        count:1
       }
     },
     props:['id'],
@@ -69,8 +73,17 @@
             console.error(err);
           })
       },
+      push(){
+        this.$router.push({name:'goodsDesc',params:{id:this.id}})
+      },
+      pushone(){
+        this.$router.push({name:'goodsComment',params:{id:this.id}})
+      },
+      numberchanged(count){
+        this.count = count
+      },
       addshopcar(){
-        
+        vueObj.$emit('updateBadge',this.count)
       }
     }
   }
@@ -130,8 +143,9 @@
   .params{
     padding: 5px 30px;
   }
-  .mint-button--primary.is-plain{
+  .mui-btn-outlined.mui-btn-primary{
     margin-bottom: 10px;
+    width: 100%;
   }
   .mint-button{
     font-size: 14px;

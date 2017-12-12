@@ -11,7 +11,7 @@
             </div>
             <div class="imglist">
                 <ul>
-                    <li v-for="item in images">
+                    <li v-for="item in images" :key="item.id">
                         <router-link v-bind='{to:"/share"+item.id}'>
                             <img  v-lazy="item.img_url">
                         </router-link>

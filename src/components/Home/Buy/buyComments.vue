@@ -1,6 +1,6 @@
 <template>
   <div class="mui-content">
-    <comment :newsid="id"></comment>
+    <comment :id="id"></comment>
   </div>
 </template>
 <script>

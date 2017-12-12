@@ -1,24 +1,25 @@
 <template>
-  <div class="mui-content">
-      <div class="buy">
+  <div ref="muicontent" class="mui-content">
+    <mt-loadmore :autoFill="false" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" 
+    @bottom-status-change="statusChange" ref="loadmore">
         <ul class="mui-table-view mui-grid-view">
-          <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goods" :key="item.id">
-            <router-link :to="{name:'goodsDetail',params:{id:item.id}}">
-              <img class="mui-media-object" :src="item.img_url">
-              <h5>{{ item.title }}</h5>
-            </router-link>    
-            <div class="box">
-              <div class="price">
-                <h6><span>￥{{ item.sell_price }}</span><s>￥{{ item.market_price}}</s></h6>
-                <div class="sell">
-                  <span class="count">剩{{ item.stock_quantity}}件</span>
-                  <span class="topsell">热卖中</span>
+            <li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goods" :key="item.id">
+                <router-link :to="{name:'goodsDetail',params:{id:item.id}}">
+                <img class="mui-media-object" :src="item.img_url">
+                <h5>{{ item.title }}</h5>
+                </router-link>    
+                <div class="box">
+                <div class="price">
+                    <h6><span>￥{{ item.sell_price }}</span><s>￥{{ item.market_price}}</s></h6>
+                    <div class="sell">
+                    <span class="count">剩{{ item.stock_quantity}}件</span>
+                    <span class="topsell">热卖中</span>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </li>
-		    </ul>    
-      </div>
+                </div>
+            </li>
+        </ul>   
+    </mt-loadmore>
   </div>
 </template>
 <script>
@@ -26,11 +27,16 @@ export default {
     data(){
       return{
         goods:[],
-        pageindex:1
+        pageindex:1,
+        allLoaded:false
       }
     },
     created(){
       this.getgoodslist()
+    },
+    mounted(){
+        let height = document.documentElement.clientHeight
+        this.$refs.muicontent.style.height = height+'px'
     },
     methods:{
       getgoodslist(){
@@ -38,10 +44,26 @@ export default {
         this.axios
           .get(url)
           .then((response)=>{
-            if(response.status===200&&response.data.status===0){
-              this.goods = response.data.message
+            if(response.status === 200 && response.data.status === 0){
+                if(response.data.message.length === 0){
+                    this.allLoaded = true
+                }
+                
+              this.goods = this.goods.concat(response.data.message)
+              this.$refs.loadmore.onBottomLoaded()
             }
           })
+          .catch((err)=>{
+              console.error(err)
+          })
+      },
+      loadBottom(){
+          console.log('调用了');
+          this.pageindex++
+          this.getgoodslist()
+      },
+      statusChange(status){
+          console.log(status);
       }
     }
 }
@@ -94,7 +116,7 @@ export default {
         margin-bottom: 5px;
         text-align: left;
         color: #000;
-        /* white-space: normal; */
+        white-space: normal;
     }
     h5{
         color:#000;
@@ -134,6 +156,9 @@ export default {
         width: 55%;
         text-align: right;
         color:rgba(92,92,92,0.8);
+    }
+    .mint-loadmore{
+        padding-bottom: 50px;
     }
 </style>
 

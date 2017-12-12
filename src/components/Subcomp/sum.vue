@@ -1,50 +1,59 @@
 <template>
-  <div class="mui-content-padded">
-    <div class="mui-numbox">
-      <button class="mui-btn mui-btn-numbox-plus" type="button" v-on:click="plus">+</button>
-      <input class="mui-input-numbox" type="number" v-model="number" @keyup="inpNum"/>
-      <button class="mui-btn mui-btn-numbox-minus" type="button" v-on:click="minus">-</button>
-    </div>
+  <div class="number">
+    <div @click="add" class="left">+</div><div class="middle">{{ count }}</div><div class="right" @click="sub">-</div>
   </div>
 </template>
 <script>
   export default{
     data(){
       return{
-        number:1,
+        count:1,
       }
     },
     props:['storageNum'],
     methods:{
-      plus(){
-        if(this.number < this.storageNum){
-         
-          this.number ++
-        }else{
-          this.$toast('请输入正确的数量')
-          this.number=1
+      add(){
+        if(this.count >= this.storageNum){
+          return
         }
+        this.count++
       },
-      minus(){
-        if(this.number > 1){
-          this.number--
+      sub(){
+        if(this.count === 1){
+          return
         }
-        this.$toast('请输入正确的数量')
-        this.number=1
+        this.count--
       },
       inpNum(){
-        if(this.number > this.storageNum || this.number < 1){
-          this.$toast('请输入正确的数量')
-          this.number = 1
+        if(this.count > this.storageNum || this.count < 1){
+          this.count = 1
         }
+      },
+      notify(){
+        this.$emit('numberchange',this.count)
       }
     }
   }
 </script>
 <style scoped>
-  .mui-numbox{
+  .number {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .number .left,
+  .number .middle,
+  .number .right {
+    display: inline-block;
+    width: 30px;
     height: 25px;
-    line-height: 25px;
+    border: 1px solid rgba(92, 92, 92, 0.5);
+  }
+
+  .number .middle {
+    width: 40px;
+    border-right: 0px;
+    border-left: 0px;
   }
 </style>
 

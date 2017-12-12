@@ -24,22 +24,31 @@ let router = new VueRouter({
     linkActiveClass: 'mui-active',
     routes: [
         { path: '/', redirect: '/home' },
-        { path: '/home', component: home },
-        { path: '/member', component: member },
-        { path: '/search', component: search },
-        { path: '/shopcar', component: shopcar },
-        { path: '/news', component: news },
-        { path: '/share', component: share },
-        { path: '/contact', component: contact },
-        { path: '/feedback', component: feedback },
-        { path: '/buy', component: buy },
-        { path: '/video', component: video },
+        { path: '/home', meta: { title: '首页' }, component: home },
+        { path: '/member', meta: { title: '会员中心' }, component: member },
+        { path: '/search', meta: { title: '搜索' }, component: search },
+        { path: '/shopcar', meta: { title: '购物车' }, component: shopcar },
+        { path: '/news', meta: { title: '新闻' }, component: news },
+        { path: '/share', meta: { title: '分享' }, component: share },
+        { path: '/contact', meta: { title: '联系我们' }, component: contact },
+        { path: '/feedback', meta: { title: '反馈' }, component: feedback },
+        { path: '/buy', meta: { title: '购买' }, component: buy },
+        { path: '/video', meta: { title: '视频' }, component: video },
         { name: 'newsDetail', path: '/detail/:id', component: newsdetail, props: true },
         { name: 'shareDetail', path: '/shareInfo/:id', component: sharedetail, props: true },
         { name: 'goodsDetail', path: '/buy/:id', component: goodsdetail, props: true },
         { name: 'goodsComment', path: '/buy/comment/:id', component: buycomment, props: true },
         { name: 'goodsDesc', path: '/buy/desc/:id', component: buydesc, props: true }
     ]
+})
+
+//路由跳转之后执行
+router.afterEach((to, from) => {
+    if (to.meta.title) {
+        document.title = to.meta.title
+    } else {
+        document.title = '默认值'
+    }
 })
 
 export default router

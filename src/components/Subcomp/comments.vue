@@ -34,14 +34,14 @@
                 pageIndex:1
             }
         },
-        props:['newsid'],
+        props:['id'],
         created(){
             this.getComments()
         },
         methods:{
             getComments(isReload){
                 this.$http
-                .get('getcomments/'+this.newsid+'?pageindex='+this.pageIndex)
+                .get('getcomments/'+this.id+'?pageindex='+this.pageIndex)
                 .then((response)=>{
                     if(response.status===200 && response.data.status===0){
                         if(response.data.length!==0){
@@ -65,7 +65,7 @@
                     return
                 }
                 this.$http
-                .post('postcomment/'+this.newsid,'content='+this.content)
+                .post('postcomment/'+this.id,'content='+this.content)
                 .then((response)=>{
                     if(response.data.status===0){
                         this.getComments()

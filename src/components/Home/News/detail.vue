@@ -6,7 +6,7 @@
     </div>
     <div class="details" v-html="news.content">
     </div>
-    <comments :newsid="id"></comments>
+    <comments :id="id"></comments>
   </div>
 </template>
 <script>
