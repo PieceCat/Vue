@@ -10,8 +10,20 @@
           </div>
           <div class="num">
             购买数量：
+<<<<<<< HEAD
             <sum :storageNum="goodsInfo.stock_quantity" @numberchange="numberchanged"></sum>
+=======
+            <sum :storageNum="goodsInfo.stock_quantity" @numberChange="numberChanged"></sum>
+            <transition 
+                    v-on:before-enter="beforeEnter"
+                    v-on:enter="enter"
+                    v-on:after-enter="afterEnter"
+                    v-on:after-leave="afterLeave">
+            <div v-show="isShow" class="ball"></div>
+            </transition>
+>>>>>>> dev
           </div>
+          
           <div class="button">
             <div class="mui-btn mui-btn-primary">立即购买</div>
             <button @click="addshopcar" class="mui-btn mui-btn-danger">加入购物车</button>
@@ -45,12 +57,21 @@
   import slider from '../../Subcomp/slide.vue'
   import sum from '../../Subcomp/sum.vue'
   import vueObj from '../../../config/communication'
+<<<<<<< HEAD
+=======
+  import { setData } from '../../../config/localstorageHelp'
+>>>>>>> dev
   export default{
     data(){
       return{
         goodsInfo:{},
         imgurl:'',
+<<<<<<< HEAD
         count:1
+=======
+        count:1,
+        isShow:false
+>>>>>>> dev
       }
     },
     props:['id'],
@@ -87,12 +108,54 @@
         this.$router.push({name:'goodsComment',params:{id:this.id}})
       },
 <<<<<<< HEAD
+<<<<<<< HEAD
       numberchanged(count){
         this.count = count
       },
 =======
 >>>>>>> dev
       addshopcar(){
+=======
+      //数字变化是触发该事件
+      numberChanged(count){
+        
+        this.count = count
+      },
+      addshopcar(count){
+        //点击添加购物车，把this.count传给通讯模块
+        //显示小球
+        this.isShow = true
+        // vueObj.$emit('updateBadge',this.count)
+        setData({id:this.id,count:this.count})
+      },
+      //执行动画的钩子函数
+      beforeEnter(el){
+        el.style.transform = 'translate(0,0)'
+      },
+      enter(el,done){
+        
+        //getBoundingClientRect()方法返回元素的大小以及相对于视口的位置
+        //小球的位置
+        let elX = el.getBoundingClientRect().left
+        let elY = el.getBoundingClientRect().top
+        //badge的位置
+        //通过dom获取badge
+        let badge = document.querySelector('.mui-badge')
+        let badgeX = badge.getBoundingClientRect().left
+        let badgeY = badge.getBoundingClientRect().top
+
+        let x = badgeX - elX
+        let y = badgeY - elY
+        
+        el.style.transform = `translate(${x}px,${y}px)`
+        done()
+      },
+      afterEnter:function(el){
+        this.isShow = false
+      },
+      afterLeave:function(){
+        //当小球完全离开的时候更新badge
+>>>>>>> dev
         vueObj.$emit('updateBadge',this.count)
       }
     }
@@ -131,6 +194,7 @@
   .num{
     font-size: 14px;
     margin: 10px;
+    position: relative;
   }
   .mui-content-padded{
     margin: 0;
@@ -166,6 +230,17 @@
   }
   .button a:first-child{
     margin-bottom: 10px;
+  }
+  .ball {
+    left: 115px;
+    top: 3px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: red;
+    transition: all 0.5s linear;
+    z-index: 1000;
   }
 </style>
 

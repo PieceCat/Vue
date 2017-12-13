@@ -14,7 +14,11 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/shopcar">
+<<<<<<< HEAD
 				<span class="mui-icon mui-icon-weibo"><span class="mui-badge">0</span></span>
+=======
+				<span class="mui-icon iconfont icon-weibo"><span class="mui-badge">{{ count }}</span></span>
+>>>>>>> dev
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/search">
@@ -26,12 +30,16 @@
     </div>
 </template>
 <script>
+	import vueObj from './config/communication'
+	//导入本地存储模块
+	import { getData } from './config/localstorageHelp'
     export default{
         data(){
             return{
-				isShow:false
+				isShow:false,
+				count:0
             }
-        },
+		},
 		methods:{
 			goback(){
 				//后退
@@ -48,6 +56,17 @@
 		},
 		created(){
 			this.judgeBack(this.$route.path)
+			//当组件创建完毕，监听updateBadge事件
+			vueObj.$on('updateBadge',(count)=>{
+				this.count += count
+			})
+			//读取本地存储中商品的总数
+			let data = getData()
+			let count = 0;
+			data.forEach(item => {
+				count += item.count
+			});
+			this.count = count
 		},
 		watch: {
 			'$route':function(newValue){

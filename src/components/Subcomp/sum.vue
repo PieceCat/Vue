@@ -1,6 +1,15 @@
 <template>
+<<<<<<< HEAD
   <div class="number">
     <div @click="add" class="left">+</div><div class="middle">{{ count }}</div><div class="right" @click="sub">-</div>
+=======
+  <div class="mui-content-padded">
+    <div class="mui-numbox">
+      <button class="mui-btn mui-btn-numbox-plus" type="button" v-on:click="plus">+</button>
+      <input class="mui-input-numbox" type="number" v-model="count" @keyup="inpNum"/>
+      <button class="mui-btn mui-btn-numbox-minus" type="button" v-on:click="sub">-</button>
+    </div>
+>>>>>>> dev
   </div>
 </template>
 <script>
@@ -30,18 +39,21 @@
           this.count = 1
 =======
       plus(){
-        if(this.number >= this.storageNum){
+        if(this.count >= this.storageNum){
           return
         }
-        this.number++
+        this.count++
+        this.notify()
       },
-      minus(){
-        if(this.number === 1){
+      sub(){
+        if(this.count === 1){
           return
         }
-        this.number--;
+        this.count--
+        this.notify()
       },
       inpNum(){
+<<<<<<< HEAD
         if(this.number > this.storageNum || this.number < 1){
           this.number = 1
 >>>>>>> dev
@@ -49,6 +61,14 @@
       },
       notify(){
         this.$emit('numberchange',this.count)
+=======
+        if(this.count > this.storageNum || this.count < 1){
+          this.count = 1
+        }
+      },
+      notify(){
+        this.$emit('numberChange',this.count)
+>>>>>>> dev
       }
     }
   }
@@ -76,6 +96,10 @@
 =======
     line-height: 25px;
     display: inline-block;
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+    width: 110px;
 >>>>>>> dev
   }
 </style>
