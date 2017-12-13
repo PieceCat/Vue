@@ -21,6 +21,7 @@
 </template>
 <script>
     import sum from '../Subcomp/sum.vue'
+    import { getData,setData } from '../../config/localstorageHelp'
     export default{
         data(){
             return{
