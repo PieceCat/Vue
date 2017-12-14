@@ -12,15 +12,20 @@
     data(){
       return{
         count:1,
+        type:''
       }
     },
-    props:['storageNum'],
+    props:['storageNum','num','id'],
+    created(){
+      this.count = this.num ? this.num : 1
+    },
     methods:{
       plus(){
         if(this.count >= this.storageNum){
           return
         }
         this.count++
+        this.type = 'plus'
         this.notify()
       },
       sub(){
@@ -28,6 +33,7 @@
           return
         }
         this.count--
+        this.type = 'sub'
         this.notify()
       },
       inpNum(){
@@ -36,7 +42,7 @@
         }
       },
       notify(){
-        this.$emit('numberChange',this.count)
+        this.$emit('numberChange',{count:this.count,id:this.id,type:this.type})
       }
     }
   }
