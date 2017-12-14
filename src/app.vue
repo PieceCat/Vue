@@ -33,12 +33,12 @@
 	import vueObj from './config/communication'
 	//导入本地存储模块
 	import { getData } from './config/localstorageHelp'
-    export default{
-        data(){
-            return{
-				isShow:false,
-				count:0
-            }
+  export default{
+		data(){
+				return {
+					isShow: false,
+					count:0
+				}
 		},
 		methods:{
 			goback(){
@@ -52,21 +52,29 @@
 				}else{
 					this.isShow = false;
 				}
-			}
-		},
-		created(){
-			this.judgeBack(this.$route.path)
-			//当组件创建完毕，监听updateBadge事件
-			vueObj.$on('updateBadge',(count)=>{
-				this.count += count
-			})
-			//读取本地存储中商品的总数
+			},
+			getcount(){
+					//读取本地存储中商品的总数
 			let data = getData()
 			let count = 0;
 			data.forEach(item => {
 				count += item.count
 			});
 			this.count = count
+			}
+		},
+		created(){
+			this.judgeBack(this.$route.path)
+			this.getcount()
+			//当组件创建完毕，监听updateBadge事件
+			vueObj.$on('updateBadge',(count)=>{
+				this.count += count
+			})
+			//在购物车删除数据的时候
+			vueObj.$on('update',()=>{
+				this.getcount()
+			})
+		
 		},
 		watch: {
 			'$route':function(newValue){

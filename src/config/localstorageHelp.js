@@ -24,3 +24,20 @@ export function setData(json) {
     //存储订单对象到localStorage
     localStorage.setItem('goodslist', JSON.stringify(data))
 }
+export function deleteData(id) {
+    let data = getData()
+    let index = data.findIndex((item) => {
+        return item.id == id
+    })
+    data.splice(index, 1)
+    localStorage.setItem('goodslist', JSON.stringify(data))
+}
+export function update(json) {
+    let data = getData()
+    data.forEach((item) => {
+        if (item.id == json.id) {
+            item.count += json.num
+        }
+    })
+    localStorage.setItem('goodslist', JSON.stringify(data))
+}
